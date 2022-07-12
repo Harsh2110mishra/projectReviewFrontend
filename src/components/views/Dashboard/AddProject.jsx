@@ -12,7 +12,7 @@ export default function AddProject() {
      const [selectedFile, setSelectedFile] = useState([]);
     const [category, setCategory] = useState("");
     let history = useHistory();
-
+const token = window.localStorage.getItem("token");
     const handleSubmit = async(event) => {
         event.preventDefault();
         const fileData = new FormData();

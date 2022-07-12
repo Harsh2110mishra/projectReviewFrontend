@@ -13,24 +13,18 @@ export default function ChangeRole() {
 const token = window.localStorage.getItem("token");
   const handleSubmit = async (e) => {
     e.preventDefault();
- 
+    const fileData = new FormData();
+    fileData.append("email", email);
+    fileData.append("role", role);
     try {
-      const apiHeaders = {
-        headers: {
-          
-          "Content-Type": "application/json, text/plain, */*",
-          token: `${token}`,
-        },
-      };
       const result = await Axios.put(
         `${process.env.REACT_APP_BASE_URL}/api/admin/users`,
+        fileData,
         {
-          email: email,
-          role: role,
-        },
-        {
-          
-          headers: apiHeaders,
+          headers: {
+            "Content-Type": "application/json, text/plain, */*",
+            token: `${token}`,
+          },
         }
       );
       console.log("result:", result);

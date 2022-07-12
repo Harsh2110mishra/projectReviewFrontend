@@ -36,7 +36,8 @@ export default function dashboardCard(props) {
         comment: [],
         rating: [],
         name:[]
- });
+    });
+    let history = useHistory();
 
   // material-ui
   const [expanded, setExpanded] = React.useState(false);
@@ -50,15 +51,15 @@ const token = window.localStorage.getItem("token");
        setReview(props.review);
    },[props])
     const handleSubmit = async(e) => {
-         e.preventDefault();
+      e.preventDefault();
+      const fileData = new FormData();
+      fileData.append("rating", rating);
+      fileData.append("comment", comment);
+      fileData.append("projectId", props.projectId);
          try {
            const result = await Axios.put(
              `${process.env.REACT_APP_BASE_URL}/api/admin/Project/addReview`,
-             {
-               rating: rating,
-               comment: comment,
-               projectId: props.projectId,
-             },
+             fileData,
              {
                headers: {
                  "Content-Type": "application/json, text/plain, */*",
@@ -73,6 +74,7 @@ const token = window.localStorage.getItem("token");
            alert(err);
          }
     }
+  console.log(rating, comment);
   return (
     <div
       style={{
