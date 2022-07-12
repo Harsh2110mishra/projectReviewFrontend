@@ -29,7 +29,7 @@ const token = window.localStorage.getItem("token");
       );
       console.log("result:", result);
       alert(" Role Changed");
-      history.push("/Dashboard");
+      window.location.reload();
     } catch (err) {
       alert(err);
     }
